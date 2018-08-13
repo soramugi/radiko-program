@@ -22,6 +22,10 @@ export default class App extends Vue {
     super(obj);
   }
 
+  public mounted() {
+    this.fetch();
+  }
+
   public fetch() {
     console.log('fetch');
     axios
