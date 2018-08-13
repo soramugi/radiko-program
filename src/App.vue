@@ -1,29 +1,38 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+    <button class="btn" @click="fetch">fetch</button>
+    <List :programs="programs" />
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import HelloWorld from './components/HelloWorld.vue';
+import List from './components/List.vue';
+import axios from 'axios';
 
 @Component({
   components: {
-    HelloWorld,
+    List,
   },
 })
-export default class App extends Vue {}
+export default class App extends Vue {
+  public programs: any[] = [];
+
+  constructor(obj?: any) {
+    super(obj);
+  }
+
+  public fetch() {
+    console.log('fetch');
+    axios
+      .get('https://api.coindesk.com/v1/bpi/currentprice.json')
+      .then((res) => {
+        console.log('fetch done');
+        this.programs = Object.keys(res.data);
+      });
+  }
+}
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
 </style>
