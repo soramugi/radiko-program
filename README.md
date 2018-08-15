@@ -19,3 +19,10 @@ npm run build
 ```
 npm run lint
 ```
+
+# api
+
+```
+cd api
+php -S localhost:8000
+```

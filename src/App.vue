@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <button class="btn" @click="fetch">fetch</button>
     <List :programs="programs" />
   </div>
 </template>
@@ -18,20 +17,14 @@ import axios from 'axios';
 export default class App extends Vue {
   public programs: any[] = [];
 
-  constructor(obj?: any) {
-    super(obj);
-  }
-
-  public mounted() {
+  public created() {
     this.fetch();
   }
 
   public fetch() {
-    console.log('fetch');
     axios
-      .get('https://api.coindesk.com/v1/bpi/currentprice.json')
+      .get('https://api-radiko.soramugi.net/program/today/JP13.xml')
       .then((res) => {
-        console.log('fetch done');
         this.programs = Object.keys(res.data);
       });
   }
