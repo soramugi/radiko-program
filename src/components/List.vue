@@ -1,7 +1,8 @@
 <template>
   <div class="">
-    {{programs}}
-    <p v-for="program in programs"> {{program}} </p>
+    <p v-for="station of stations">
+      {{station['@attributes'].region_name}}
+    </p>
   </div>
 </template>
 
@@ -11,13 +12,8 @@ import { Component, Prop, Watch, Vue } from 'vue-property-decorator';
 @Component
 export default class List extends Vue {
   @Prop(Array)
-  public programs!: any[];
+  public stations!: any[];
 
-  constructor(obj?: any) {
-    super(obj);
-    // setInterval(() => {
-    //   console.log(this.programs);
-    // }, 100);
-  }
+  public station: any;
 }
 </script>

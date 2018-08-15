@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <List :programs="programs" />
+    <List :stations="stations" />
   </div>
 </template>
 
@@ -15,7 +15,7 @@ import axios from 'axios';
   },
 })
 export default class App extends Vue {
-  public programs: any[] = [];
+  public stations: any[] = [];
 
   public created() {
     this.fetch();
@@ -23,9 +23,9 @@ export default class App extends Vue {
 
   public fetch() {
     axios
-      .get('https://api-radiko.soramugi.net/program/today/JP13.xml')
+      .get('https://api-radiko.soramugi.net/station/region/full.xml')
       .then((res) => {
-        this.programs = Object.keys(res.data);
+        this.stations = res.data.stations;
       });
   }
 }
